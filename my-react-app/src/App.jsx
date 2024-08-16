@@ -11,33 +11,33 @@ const fetchPosts = async () => {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     return await response.json(); // Return the parsed JSON data
-  } catch (error) {
+  } catch (err) {
     // Throw an error to be caught by the calling function
-    throw new Error(error.message);
+    throw new Error(err.message);
   }
 };
 
 // Main component of the app
 export default function App() {
-  const [data, setData] = useState([]); // State to store fetched data
-  const [error, setError] = useState(null); // State to store any error messages
-  const [loading, setLoading] = useState(true); // State to manage the loading state
+  const [data, setData] = useState([]); 
+  const [error, setError] = useState(null); 
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     // Function to load data from the API and handle state updates
     const loadData = async () => {
       try {
-        const result = await fetchPosts(); // Fetch data from the API
+        const result = await fetchPosts(); 
         setData(result); // Update state with the fetched data
-      } catch (error) {
+      } catch {
         setError("Failed to fetch data. Please try again later."); // Update state with an error message
       } finally {
         setLoading(false); // Set loading state to false after the fetch attempt
       }
     };
 
-    loadData(); // Trigger data loading when the component mounts
-  }, []); // Empty dependency array ensures this effect runs only once after the initial render
+    loadData(); 
+  }, []); 
 
   // Render loading message if data is being fetched
   if (loading) {
